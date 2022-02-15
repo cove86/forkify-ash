@@ -10,9 +10,9 @@ import addRecipeView from './views/addRecipeView.js';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-if (module.hot) {
-  module.hot.accept();
-}
+// if (module.hot) {
+//   module.hot.accept();
+// }
 
 const controlRecipes = async function () {
   try {
@@ -56,7 +56,7 @@ const controlSearchResults = async function () {
     //4) Render initial Pagination buttons
     paginationView.render(model.state.search);
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 

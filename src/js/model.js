@@ -36,8 +36,6 @@ export const loadRecipe = async function (id) {
     if (state.bookmarks.some(bookmark => bookmark.id === id))
       state.recipe.bookmarked = true;
     else state.recipe.bookmarked = false;
-
-    console.log(state.recipe);
   } catch (err) {
     console.error(`${err} 🧨🧨`);
     throw err;
@@ -48,7 +46,6 @@ export const loadSearchResults = async function (query) {
   try {
     state.search.query = query;
     const data = await AJAX(`${API_URL}?search=${query}&?key=${KEY}`);
-    console.log(data);
 
     state.search.results = data.data.recipes.map(rec => {
       return {
@@ -100,7 +97,7 @@ export const addBookmark = function (recipe) {
 export const deleteBookmark = function (id) {
   // Delete bookmark
   const index = state.bookmarks.findIndex(el => el.id === id);
-  state.bookmarks.splice((index, 1));
+  state.bookmarks.splice(index, 1);
 
   // Mark current recipe as no longer bookmark
   if (id === state.recipe.id) state.recipe.bookmarked = false;
@@ -118,7 +115,7 @@ init();
 const clearBookmarks = function () {
   localStorage.clear('bookmarks');
 };
-// clearBookmarks();
+clearBookmarks();
 
 export const uploadRecipe = async function (newRecipe) {
   try {
