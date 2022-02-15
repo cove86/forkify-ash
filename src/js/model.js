@@ -1,5 +1,4 @@
 import { API_URL, KEY } from './config';
-// import { getJSON, sendJSON } from './helpers';
 import { AJAX } from './helpers.js';
 import { RES_PER_PAGE } from './config';
 
@@ -40,7 +39,6 @@ export const loadRecipe = async function (id) {
 
     console.log(state.recipe);
   } catch (err) {
-    //Temporary Errors
     console.error(`${err} 🧨🧨`);
     throw err;
   }
@@ -80,7 +78,6 @@ export const getSearchResultsPage = function (page = state.search.page) {
 export const updateServings = function (newServings) {
   state.recipe.ingredients.forEach(ing => {
     ing.quantity = (ing.quantity * newServings) / state.recipe.servings;
-    // newQt = oldQt * newServings / oldServings
   });
 
   state.recipe.servings = newServings;
@@ -129,7 +126,7 @@ export const uploadRecipe = async function (newRecipe) {
       .filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '')
       .map(ing => {
         const ingArr = ing[1].split(',').map(el => el.trim());
-        // const ingArr = ing[1].replaceAll(' ', '').split(',');
+
         if (ingArr.length !== 3) throw new Error('Wrong Ingredient format');
 
         const [quantity, unit, description] = ingArr;
